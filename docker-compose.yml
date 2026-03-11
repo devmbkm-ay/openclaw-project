@@ -1,0 +1,14 @@
+services:
+  openclaw-gateway:
+    image: ghcr.io/openclaw/openclaw:latest
+    container_name: openclaw-gateway
+    command: ["node", "openclaw.mjs", "gateway", "--allow-unconfigured", "--bind", "lan"]
+    environment:
+      - OPENCLAW_GATEWAY_TOKEN=Openclaw-connectes-me75020
+    ports:
+      - "19001:18789"
+      - "19002:18791"
+    volumes:
+      - ./data:/home/node/.openclaw
+    user: "1000:1000"
+    restart: always

@@ -1,0 +1,74 @@
+# =========================
+# OpenClaw runtime data
+# =========================
+data/
+
+# If you want to keep structure but not secrets, use instead:
+data/*
+!data/.gitkeep
+!data/workspace/
+
+# =========================
+# Secrets / auth
+# =========================
+**/auth-profiles.json
+**/*token*
+**/*secret*
+.env
+.env.*
+*.key
+*.pem
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+*.jsonl
+
+# =========================
+# Memory / databases
+# =========================
+*.sqlite
+*.sqlite3
+*.db
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
+*.pid
+*.sock
+
+# =========================
+# Node / JS build artifacts
+# (for workspace projects)
+# =========================
+node_modules/
+.next/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# =========================
+# IDE / editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Backup / temp
+# =========================
+*.bak
+*.tmp
+*.old
+*.reset.*
