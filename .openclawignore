@@ -1,0 +1,27 @@
+# Dépendances (Le plus important !)
+node_modules/
+bower_components/
+
+# Dossiers de build/output
+dist/
+build/
+.next/
+.nuxt/
+out/
+
+# Dossiers système et Git
+.git/
+.svn/
+.hg/
+.DS_Store
+Thumbs.db
+
+# Logs et temporaires
+*.log
+.npm/
+.eslintcache
+.cache/
+
+# Environnement (Sécurité)
+.env
+.env.*

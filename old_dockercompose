@@ -32,34 +32,3 @@ services:
 
     user: "1000:1000"
     restart: unless-stopped
-
-  openclaw-autoapprove:
-    image: ${OPENCLAW_IMAGE:-ghcr.io/openclaw/openclaw:latest}
-    container_name: openclaw-autoapprove
-
-    depends_on:
-      - openclaw-gateway
-
-    env_file:
-      - .env
-
-    environment:
-      OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN}
-
-    volumes:
-      - ./data:/home/node/.openclaw
-
-    user: "1000:1000"
-    restart: "no"
-
-    entrypoint:
-      - /bin/sh
-      - -lc
-
-    command: >
-      ' sleep 8 for i in 1 2 3 4 5 6 7 8 9 10; do
-        node openclaw.mjs devices approve --latest && exit 0
-        sleep 3
-      done exit 0 '
-
-    network_mode: "service:openclaw-gateway"
