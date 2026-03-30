@@ -29,6 +29,7 @@ services:
       - /home/ricardo/DEV/noceflorale:/projects/noceflorale:rw
       - /home/ricardo/DEV/fininside:/projects/fininside:rw
       - /home/ricardo/DEV/enidpath:/projects/enidpath:rw
+      - /home/ricardo/DEV/devassistant:/projects/devassistant:rw
 
     user: "1000:1000"
     restart: unless-stopped
