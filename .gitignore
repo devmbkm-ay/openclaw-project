@@ -1,53 +1,133 @@
 # =========================
 # OpenClaw runtime data
 # =========================
-data/
-
-# If you want to keep structure but not secrets, use instead:
 data/*
 !data/.gitkeep
 !data/workspace/
 
+# Keep workspace structure but ignore runtime files
+data/logs/
+data/media/inbound/*
+!data/media/inbound/.gitkeep
+data/agents/*/sessions/*.jsonl
+data/agents/*/sessions/*.jsonl.reset.*
+data/cron/jobs.json.bak*
+data/cron/jobs.json.*
+data/devices/*.bak*
+data/identity/*.bak*
+data/workspace/.env*
+data/workspace/.next/
+data/workspace/node_modules/
+
 # =========================
-# Secrets / auth
+# Secrets / Authentication
 # =========================
 **/auth-profiles.json
 **/*token*
 **/*secret*
 .env
-.env.*
+.env.local
+.env.*.local
+.env.production.local
+.env.development.local
+.env.test.local
 *.key
 *.pem
+secrets/
+.secrets/
+private/
 
 # =========================
 # Logs
 # =========================
 *.log
 logs/
-*.jsonl
+*.jsonl.reset.*
+**/*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # =========================
-# Memory / databases
+# Memory / Databases
 # =========================
 *.sqlite
 *.sqlite3
 *.db
+*.db-journal
+.prisma/
 
 # =========================
 # Docker
 # =========================
 docker-compose.override.yml
+.dockerignore
 *.pid
 *.sock
 
 # =========================
-# Node / JS build artifacts
-# (for workspace projects)
+# Node / JS / TypeScript
 # =========================
 node_modules/
 .next/
 dist/
 build/
+*.tsbuildinfo
+out/
+.turbopack/
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+.vim/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+.editorconfig.*
+
+# =========================
+# Hugging Face / ML
+# =========================
+.cache/
+huggingface_hub_cache/
+models/
+*.safetensors
+.hf_*
+hf_token
+
+# =========================
+# Build & Cache
+# =========================
+.cache/
+.eslintcache
+.stylelintcache
+tsc-cache/
+
+# =========================
+# Temporary / Generated
+# =========================
+*.tmp
+*.temp
+/tmp/
+/temp/
+*.bak
+*.backup
+.DS_Store
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+.vagrant/
+.venv/
+env/
 coverage/
 *.tsbuildinfo
 
