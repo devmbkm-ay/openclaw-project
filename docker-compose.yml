@@ -30,6 +30,7 @@ services:
       - /home/ricardo/DEV/fininside:/projects/fininside:rw
       - /home/ricardo/DEV/enidpath:/projects/enidpath:rw
       - /home/ricardo/DEV/devassistant:/projects/devassistant:rw
+      - /home/ricardo/DEV/budgetapp:/projects/budgetapp:rw
 
     user: "1000:1000"
     restart: unless-stopped
