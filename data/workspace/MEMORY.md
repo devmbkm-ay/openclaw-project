@@ -12,8 +12,12 @@ Curated long-term memory for OpenClaw collaboration with Ricardo. Keep this stab
 - Environment: Docker on Ubuntu
 - Runtime path: `docker-compose.yml` service `openclaw-gateway`
 - Config truth: `data/openclaw.json`
-- Primary model: `anthropic/claude-sonnet-4-6` (Anthropic works; Google/OpenAI had auth issues as of 2026-05)
-- Fallback chain: claude-haiku-4-5 → gpt-4o → gpt-4o-mini → gemini-2.5-pro
+- Primary model: `google/gemini-2.5-pro`
+- Fallback chain: `anthropic/claude-haiku-4-5` → `anthropic/claude-sonnet-4-6`
+- Stability note (2026-05-16): removed Groq as default primary because the injected prompt regularly exceeded its TPM/request budget; removed free OpenRouter defaults because of repeated upstream 429s and a broken Mistral free fallback.
+- Security note (2026-05-16): disabled `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback`; rely only on explicit `allowedOrigins`.
+- Catalog note (2026-05-16): cleaned `agents.defaults.models` to keep only viable default options (`google`, `anthropic`, `ollama`, `openrouter` paid/auto) and removed dead Groq/OpenAI/free OpenRouter entries from the default model list.
+- UI note (2026-05-16): disabled `openai` and `groq` plugins to reduce noise in model selectors while their accounts were not dependable for this setup.
 - Public UI: `https://assistant.ricardomboukou.online`
 
 ## Operating Policy
@@ -64,4 +68,3 @@ A secure dashboard for managing portfolio content dynamically.
 2.  **Frontend Dashboard UI:** Full management interface created at `/[lang]/admin/dashboard`.
 3.  **AI Integration:** Feature to generate project details from a GitHub URL using Gemini API and GitHub API implemented in `/api/admin/projects/analyze-repo`.
 4.  **Media Management:** Image uploads integrated with Cloudinary in `/api/admin/upload-image`.
-

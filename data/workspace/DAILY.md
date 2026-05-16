@@ -1,16 +1,21 @@
-# DAILY.md — Session Scratchpad
+## 2026-05-15 17:55 — [Point Modifications]
+- `quizflip` a des changements non-commit.
+- Nature des changements : màj dépendances, ajout de prop-types, refactor de state management, et optimisations.
+- Tous les autres projets sont propres.
 
-This file is the agent's live working memory for the current day.
-It is append-only during sessions. The nightly cron consolidates it into MEMORY.md and then clears it.
+## 2026-05-16 02:36 — [OpenClaw stabilité]
+- Diagnostic des échecs chat : Groq échouait sur prompt trop volumineux, OpenRouter free était rate-limited, et un fallback Mistral free était invalide.
+- Chaîne par défaut changée dans `data/openclaw.json` vers `google/gemini-2.5-pro` avec fallback `claude-haiku-4-5` puis `claude-sonnet-4-6`.
+- Objectif : privilégier des providers déjà vus comme fonctionnels dans l'historique local et supprimer les fallbacks les plus fragiles.
 
-## Format
+## 2026-05-16 02:40 — [OpenClaw sécurité]
+- Désactivation de `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback` dans `data/openclaw.json`.
+- Le contrôle d’origine repose maintenant uniquement sur la liste explicite `allowedOrigins`.
 
-Each entry follows this pattern:
+## 2026-05-16 02:43 — [OpenClaw nettoyage]
+- Nettoyage du catalogue `agents.defaults.models` pour retirer les entrées Groq, OpenAI et OpenRouter free qui n'étaient plus souhaitées comme options par défaut.
+- Conservation des plugins/providers actifs pour éviter de casser un usage manuel futur.
 
-```
-## YYYY-MM-DD HH:MM — [topic or project]
-- [what was done / decided / learned]
-- [any unresolved issue or follow-up]
-```
-
----
+## 2026-05-16 02:47 — [OpenClaw UI]
+- Désactivation des plugins `openai` et `groq` dans `data/openclaw.json` pour alléger les sélecteurs de modèles côté interface.
+- Conservation de `google`, `anthropic`, `openrouter` et `ollama` comme options visibles/utiles.

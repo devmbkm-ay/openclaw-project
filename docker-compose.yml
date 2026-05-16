@@ -16,6 +16,9 @@ services:
 
     environment:
       OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN}
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_API_KEY: ollama-local
+      SEARXNG_URL: http://searxng:8080
 
     ports:
       - "19001:18789"
@@ -32,7 +35,28 @@ services:
       - /home/ricardo/DEV/devassistant:/projects/devassistant:rw
       - /home/ricardo/DEV/budgetapp:/projects/budgetapp:rw
 
+    depends_on:
+      - ollama
+
     user: "1000:1000"
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama
+    container_name: openclaw-ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+
+  searxng:
+    image: searxng/searxng
+    container_name: openclaw-searxng
+    volumes:
+      - ./data/searxng:/etc/searxng:rw
+    ports:
+      - "8080:8080"
     restart: unless-stopped
 
   openclaw-autoapprove:
@@ -65,3 +89,6 @@ services:
       done exit 0 '
 
     network_mode: "service:openclaw-gateway"
+
+volumes:
+  ollama_data:
