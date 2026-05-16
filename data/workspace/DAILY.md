@@ -19,3 +19,12 @@
 ## 2026-05-16 02:47 — [OpenClaw UI]
 - Désactivation des plugins `openai` et `groq` dans `data/openclaw.json` pour alléger les sélecteurs de modèles côté interface.
 - Conservation de `google`, `anthropic`, `openrouter` et `ollama` comme options visibles/utiles.
+
+## 2026-05-16 02:52 — [OpenClaw fallback]
+- Remplacement des fallbacks Anthropic par `openrouter/auto` puis `openrouter/moonshotai/kimi-k2.6`.
+- Motif : timeouts répétés sur Gemini et billing Anthropic indisponible.
+
+## 2026-05-16 03:01 — [OpenClaw modèle principal]
+- Bascule du modèle principal de `google/gemini-2.5-pro` vers `openrouter/moonshotai/kimi-k2.6` dans `data/openclaw.json`.
+- Nouveau repli : `openrouter/auto` puis `google/gemini-2.5-pro`.
+- Motif : Gemini répond parfois, mais provoque aussi des timeouts de 120s sur des tours plus lourds, ce qui fige l'expérience chat.

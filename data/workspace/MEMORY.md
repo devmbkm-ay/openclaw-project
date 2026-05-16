@@ -18,6 +18,7 @@ Curated long-term memory for OpenClaw collaboration with Ricardo. Keep this stab
 - Security note (2026-05-16): disabled `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback`; rely only on explicit `allowedOrigins`.
 - Catalog note (2026-05-16): cleaned `agents.defaults.models` to keep only viable default options (`google`, `anthropic`, `ollama`, `openrouter` paid/auto) and removed dead Groq/OpenAI/free OpenRouter entries from the default model list.
 - UI note (2026-05-16): disabled `openai` and `groq` plugins to reduce noise in model selectors while their accounts were not dependable for this setup.
+- Fallback note (2026-05-16): replaced Anthropic fallbacks with `openrouter/auto` then `openrouter/moonshotai/kimi-k2.6` because Anthropic billing was exhausted and Gemini requests were timing out.
 - Public UI: `https://assistant.ricardomboukou.online`
 
 ## Operating Policy
@@ -30,6 +31,7 @@ Curated long-term memory for OpenClaw collaboration with Ricardo. Keep this stab
 - Batch related checks to lower overhead
 - Escalate model complexity only when task risk or ambiguity requires it
 - Preserve rollback points after config changes
+- In OpenClaw, `google/gemini-2.5-pro` has a repeated pattern of 120s idle timeouts on heavier chat turns; avoid keeping it on the critical path for the main chat agent
 
 ## Business Context
 - Model: freelance (cash flow) + indie products (leverage)

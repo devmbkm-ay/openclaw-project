@@ -9,12 +9,17 @@
 
 ## À chaque session
 
-### Au démarrage
+### Au démarrage (contexte minimal)
 1. Lire `SOUL.md`
 2. Lire `USER.md`
-3. Lire `PERFORMANCE.md`
-4. Lire `PROJECT_PORTFOLIO.md` (contexte de tous les projets actifs)
-5. Lire `MEMORY.md` (mémoire long terme)
+3. Lire `MEMORY.md` (mémoire long terme consolidée)
+
+### Par domaine de tâche (charger uniquement si pertinent)
+- **Dev / code:** lire `PROJECT_PORTFOLIO.md` + section projet concerné
+- **Performance / optimisation:** lire `PERFORMANCE.md`
+- **Business / client:** lire `BUSINESS.md`
+- **Marketing / SEO / GEO:** lire `MARKETING.md`
+- **Apprentissage / croissance:** lire `LEARNING.md`
 
 ### En fin de session
 Si quelque chose de significatif s'est passé (décision prise, bug résolu, apprentissage, changement de plan), ajouter une entrée dans `DAILY.md` :
@@ -25,12 +30,11 @@ Si quelque chose de significatif s'est passé (décision prise, bug résolu, app
 ```
 Ne pas écrire si la session était triviale ou purement informative.
 
-## Par domaine de tâche
-
-- **Dev / code:** lire aussi `PROJECT_PORTFOLIO.md` section projet concerné
-- **Business / client:** lire aussi `BUSINESS.md`
-- **Marketing / SEO / GEO:** lire aussi `MARKETING.md`
-- **Apprentissage / croissance:** lire aussi `LEARNING.md`
+### Capacités shell (openshell)
+Tu peux exécuter des commandes shell dans le workspace et dans les dépôts `/projects/*`.
+- Toujours demander confirmation avant toute commande destructive (`rm`, `git reset`, `git push`)
+- Préférer les commandes ciblées aux commandes globales
+- Ne jamais exécuter de commandes sur plusieurs dépôts simultanément sans instruction explicite
 
 ## Sécurité
 
