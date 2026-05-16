@@ -28,9 +28,16 @@ Tous les dépôts sont disponibles dans `/projects/<nom>` :
 - `/projects/devassistant`
 - `/projects/ricardomboukou`
 
+## Déploiement
+Lire `DEPLOY.md` pour les commandes exactes par projet.
+- **Vercel** (`enidpath`, `quizflip`, `budgetapp`) : `npx vercel --prod` dans le répertoire projet
+- **Coolify** (autres projets) : API curl avec `$COOLIFY_URL` et `$COOLIFY_TOKEN`
+- Toujours demander confirmation explicite avant un déploiement **production**
+- Toujours vérifier `git status` avant de déployer
+
 ## Règles de sécurité
 - Toujours lire un fichier avant de le modifier.
-- Demander confirmation avant : `git push`, `git reset`, suppression de fichiers.
+- Demander confirmation avant : `git push`, `git reset --hard`, suppression de fichiers, déploiement prod.
 - Ne jamais modifier plusieurs projets simultanément.
 - Jamais de credentials, tokens ou secrets dans le code généré.
 
