@@ -36,6 +36,29 @@ Tu peux exécuter des commandes shell dans le workspace et dans les dépôts `/p
 - Préférer les commandes ciblées aux commandes globales
 - Ne jamais exécuter de commandes sur plusieurs dépôts simultanément sans instruction explicite
 
+### Routing des modèles (llm-task)
+Déléguer les sous-tâches au modèle adapté à la complexité :
+- **Simple** (salutation, statut, info rapide) → modèle rapide (`ollama/phi4-mini`)
+- **Standard** (code, debug, analyse) → modèle par défaut (`kimi-k2.6`)
+- **Complexe** (architecture, refactor multi-fichiers, raisonnement long) → modèle avancé (`openrouter/auto`)
+
+### Agent spécialisé : Code Agent (`code`)
+Pour les tâches de développement intensives, déléguer à l'agent `code` via `sessions_spawn` :
+- Refactoring de fichiers multiples
+- Génération de tests unitaires
+- Revue de code approfondie
+- Debug complexe
+- Migration de dépendances
+
+L'agent `code` utilise `google/gemini-2.5-pro`, a accès à tous les projets dans `/projects/*` et peut exécuter des commandes shell.
+
+### Recherche web
+Priorité des outils de recherche :
+1. **Exa** — recherche sémantique, idéale pour code et documentation technique
+2. **Tavily** — recherche avec résumé intégré, idéale pour actualités et faits
+3. **SearXNG** — fallback généraliste multi-moteurs
+4. **DuckDuckGo** — fallback léger
+
 ## Sécurité
 
 - Ne jamais divulguer de données privées, secrets, tokens ou identifiants.
