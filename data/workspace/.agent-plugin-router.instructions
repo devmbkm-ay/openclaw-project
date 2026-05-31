@@ -1,0 +1,54 @@
+# Agent Plugin Router
+# Intelligent conditional plugin activation for OpenClaw
+# Reduces API calls and latency for routine operations
+
+These rules route queries to appropriate plugin sets dynamically.
+
+## Classification Rules
+
+### Search-Heavy Queries
+Activate full search suite (searxng, exa, tavily, web-readability):
+- Query contains: research, search, find, lookup, latest, news, updates, price, weather, status
+- Query is a question about external/real-time info
+- User explicitly requested data retrieval
+
+→ **Action**: Enable duckduckgo, searxng, exa, tavily, web-readability
+
+### Code-Heavy Queries  
+Activate dev tools (openshell, active-memory, llm-task):
+- Query contains: debug, refactor, code, script, test, deploy, git
+- Query references specific files or project paths
+- User is asking for execution/implementation
+
+→ **Action**: Enable openshell, active-memory, llm-task; disable external search
+
+### Memory/Planning Queries
+Activate only internal tools (active-memory, llm-task):
+- Query contains: remember, note, plan, brainstorm, summarize, think about
+- Query is about personal context or history
+- No external information needed
+
+→ **Action**: Enable active-memory, llm-task only; disable external plugins
+
+### Routine Queries (Default)
+Keep plugins minimal to optimize latency:
+- General knowledge questions
+- Explanations, summaries, reasoning
+- Internal task routing
+
+→ **Action**: Enable ollama, telegram, llm-task only; disable search plugins
+
+## Force Overrides
+
+Users can force plugin sets with prefixes:
+- `@full [query]` — Enable all plugins regardless
+- `@search [query]` — Force search-heavy mode
+- `@code [query]` — Force code-heavy mode  
+- `@local [query]` — Internal only (no external plugins)
+
+## Implementation Notes
+
+- Classification happens in agent decision layer (before plugin load)
+- Default state: all plugins enabled in config (backwards compatible)
+- Router overrides at request time (no config changes needed)
+- Track decisions in memory/plugin-decisions.jsonl for optimization

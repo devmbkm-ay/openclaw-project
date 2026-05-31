@@ -28,12 +28,13 @@ services:
       - ./data:/home/node/.openclaw
       - ./data/workspace:/workspace:rw
       - /home/ricardo/DEV/ricardomboukou:/projects/ricardomboukou:rw
-      - /home/ricardo/DEV/quizflip:/projects/quizflip:rw
+      # - /home/ricardo/DEV/quizflip:/projects/quizflip:rw
       - /home/ricardo/DEV/noceflorale:/projects/noceflorale:rw
-      - /home/ricardo/DEV/fininside:/projects/fininside:rw
+      # - /home/ricardo/DEV/fininside:/projects/fininside:rw
       - /home/ricardo/DEV/enidpath:/projects/enidpath:rw
-      - /home/ricardo/DEV/devassistant:/projects/devassistant:rw
+      # - /home/ricardo/DEV/devassistant:/projects/devassistant:rw
       - /home/ricardo/DEV/budgetapp:/projects/budgetapp:rw
+      # - /home/ricardo/DEV/ai-guard:/projects/tax-collection:rw
 
     depends_on:
       - ollama
@@ -49,6 +50,9 @@ services:
     ports:
       - "11434:11434"
     restart: unless-stopped
+    # Model setup: run `./setup-models.sh` after compose up
+    # - phi4-mini (primary): 8k context, general reasoning
+    # - neural-chat (fallback): 4k context, fast routing & classification
 
   searxng:
     image: searxng/searxng
@@ -82,11 +86,14 @@ services:
       - /bin/sh
       - -lc
 
-    command: >
-      ' sleep 8 for i in 1 2 3 4 5 6 7 8 9 10; do
-        node openclaw.mjs devices approve --latest && exit 0
-        sleep 3
-      done exit 0 '
+    command:
+      - |
+        sleep 8
+        for i in 1 2 3 4 5 6 7 8 9 10; do
+          node openclaw.mjs devices approve --latest && exit 0
+          sleep 3
+        done
+        exit 0
 
     network_mode: "service:openclaw-gateway"
 

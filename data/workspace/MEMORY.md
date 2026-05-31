@@ -12,14 +12,15 @@ Curated long-term memory for OpenClaw collaboration with Ricardo. Keep this stab
 - Environment: Docker on Ubuntu
 - Runtime path: `docker-compose.yml` service `openclaw-gateway`
 - Config truth: `data/openclaw.json`
-- Primary model: `google/gemini-2.5-pro`
-- Fallback chain: `anthropic/claude-haiku-4-5` → `anthropic/claude-sonnet-4-6`
+- Primary model: `ollama/phi4-mini`
+- Fallback chain: local-only baseline, no paid provider on the default path
 - Stability note (2026-05-16): removed Groq as default primary because the injected prompt regularly exceeded its TPM/request budget; removed free OpenRouter defaults because of repeated upstream 429s and a broken Mistral free fallback.
 - Security note (2026-05-16): disabled `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback`; rely only on explicit `allowedOrigins`.
 - Catalog note (2026-05-16): cleaned `agents.defaults.models` to keep only viable default options (`google`, `anthropic`, `ollama`, `openrouter` paid/auto) and removed dead Groq/OpenAI/free OpenRouter entries from the default model list.
 - UI note (2026-05-16): disabled `openai` and `groq` plugins to reduce noise in model selectors while their accounts were not dependable for this setup.
 - Fallback note (2026-05-16): replaced Anthropic fallbacks with `openrouter/auto` then `openrouter/moonshotai/kimi-k2.6` because Anthropic billing was exhausted and Gemini requests were timing out.
 - Public UI: `https://assistant.ricardomboukou.online`
+- Baseline note (2026-05-24): active config simplified to Ollama-first for both main and code agents; disabled Anthropic, Google, OpenRouter, OpenAI, and Groq plugins from the active session path to avoid billing and rate-limit failures.
 
 ## Operating Policy
 - Priority order: explicit user request -> repository docs -> MEMORY.md
@@ -31,7 +32,7 @@ Curated long-term memory for OpenClaw collaboration with Ricardo. Keep this stab
 - Batch related checks to lower overhead
 - Escalate model complexity only when task risk or ambiguity requires it
 - Preserve rollback points after config changes
-- In OpenClaw, `google/gemini-2.5-pro` has a repeated pattern of 120s idle timeouts on heavier chat turns; avoid keeping it on the critical path for the main chat agent
+- In OpenClaw, the local Ollama baseline is preferred for routine stability; only reintroduce external providers intentionally after validation
 
 ## Business Context
 - Model: freelance (cash flow) + indie products (leverage)
@@ -49,6 +50,13 @@ Curated long-term memory for OpenClaw collaboration with Ricardo. Keep this stab
 1. Cognitive expansion: memory drills and deep-work support (see LEARNING.md)
 2. Financial sovereignty: disciplined risk/reward analysis, BTC cycle awareness
 3. Physical/spiritual base: callisthenics, mindfulness, music (guitar)
+
+## Paused / Pending Tasks
+
+*   **Email Management Setup (Paused on 2026-05-17):**
+    *   **Goal:** Automate email triage, summaries, draft replies, and bill notifications for Gmail and Outlook.
+    *   **Status:** User confirmed interest. Paused before starting the Google Cloud API setup for Gmail.
+    *   **Next Step:** Guide the user through the Google Cloud Console to create OAuth credentials for the Gmail API.
 
 ## Plan: Secure Admin Dashboard
 
