@@ -92,15 +92,6 @@ Thumbs.db
 .editorconfig.*
 
 # =========================
-# Hugging Face / ML
-# =========================
-.cache/
-huggingface_hub_cache/
-models/
-*.safetensors
-.hf_*
-hf_token
-
 # =========================
 # Build & Cache
 # =========================

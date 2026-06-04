@@ -59,8 +59,12 @@ echo "📦 Checking models..."
 echo ""
 
 # Pull models
-pull_model "phi4-mini" "General reasoning baseline (8k context)"
-pull_model "neural-chat" "Fast routing & classification (4k context)"
+# Hardware profile: i7-4790 (CPU-only), 12GB RAM (~6.5GB free), GTX 760 (no usable VRAM for Ollama)
+# qwen2.5:1.5b  → ~1.1GB RAM, stable, primary local fallback
+# phi4-mini      → ~2.3GB RAM, keep as secondary if pulled manually
+# neural-chat    → ~4GB RAM, too heavy — skip unless needed for routing
+pull_model "qwen2.5:1.5b" "Stable primary local fallback — ~1.1GB RAM, 4k context"
+pull_model "phi4-mini" "Secondary local fallback — ~2.3GB RAM, 4k context (with guardrails)"
 
 echo ""
 echo "✅ Model setup complete!"
@@ -69,5 +73,6 @@ echo "📊 Available models:"
 curl -s "$OLLAMA_HOST/api/tags" | grep -o '"name":"[^"]*"' | cut -d'"' -f4 | sed 's/^/   - /'
 echo ""
 echo "💡 Configuration active in: data/openclaw.json"
-echo "   - Primary: ollama/phi4-mini"
-echo "   - Fallback: ollama/neural-chat (for faster classification)"
+echo "   - Primary local: ollama/qwen2.5:1.5b (stable, lightweight)"
+echo "   - Fallback local: ollama/phi4-mini (guarded: 4k ctx, 256 tokens max)"
+echo "   - Routing agent:  groq/llama-3.3-70b-versatile → openrouter → ollama"
