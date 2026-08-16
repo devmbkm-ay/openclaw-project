@@ -19,6 +19,12 @@ data/workspace/.env*
 data/workspace/.next/
 data/workspace/node_modules/
 
+# Timestamped manual backups (*.bak-YYYYMMDDHHMMSS style dirs)
+*.bak-[0-9]*
+*.local-backup-[0-9]*
+data/workspace/openclaw-workspace-state.json
+data/workspace/*/openclaw-workspace-state.json
+
 # =========================
 # Secrets / Authentication
 # =========================
